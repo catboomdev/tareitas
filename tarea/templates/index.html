@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1345/1345063.png" type="image/x-icon">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Que tareas hay</h1>
+        <ul>
+            <li>En lengua hay que llevar un octavo de cartulina</li>
+            <li>Tarea ingles </li>
+            <li>Tarea religion</li>
+            <li>Tarea sociales</li>
+            <li>En etica acabar el dibujo</li>
+            <li>Para tener una tarea escriban tarea "Materia"</li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h1>Enviar Tareas</h1>
+        <form id="tarea-form" action="/submit" method="post">
+            <textarea name="tarea" rows="4" placeholder="Escribe tu tarea aquí..."></textarea><br>
+            <input type="submit" name="submit" value="Enviar">
+        </form>
+        <div id="respuesta"></div>
+    </div>
+    <footer>
+    ojo donen eh eh
+    </footer>
+    <script>
+    document.getElementById('tarea-form').onsubmit = async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const tarea = formData.get('tarea');
+        const respuesta = await fetch('/submit', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text());
+        document.getElementById('respuesta').innerText = respuesta;
+    };
+    </script>
+    
+    
+</body>
+</html>
+
+
+
